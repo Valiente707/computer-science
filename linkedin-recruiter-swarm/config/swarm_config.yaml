@@ -1,0 +1,187 @@
+# LinkedIn Recruiter Swarm Configuration
+
+swarm:
+  max_workers: 4
+  enable_parallel_search: true
+  adaptive_mode: true
+
+# Search Agent Configuration
+search_agent:
+  default_strategy: "targeted"
+  max_results_per_search: 100
+  enable_cache: true
+  cache_ttl_hours: 24
+
+  strategies:
+    targeted:
+      exact_title_match: true
+      min_skill_overlap: 0.7
+      strict_requirements: true
+
+    broad:
+      location_radius_miles: 100
+      experience_flexibility: 2  # years +/-
+      skill_overlap_threshold: 0.4
+
+    passive:
+      employment_status: "employed"
+      min_tenure_months: 12
+      activity_level: "high"
+
+    similar_profile:
+      use_top_performers: true
+      similarity_threshold: 0.75
+
+# Scoring Agent Configuration
+scoring_agent:
+  min_threshold: 0.6
+
+  scoring_weights:
+    skill_match: 0.40
+    experience_match: 0.30
+    title_match: 0.15
+    location_match: 0.10
+    activity_score: 0.05
+
+  enhanced_scoring:
+    enable_diversity_bonus: true
+    enable_culture_fit: true
+    enable_trajectory_analysis: true
+    enable_education_scoring: true
+
+  tier_thresholds:
+    excellent: 0.9
+    strong: 0.8
+    good: 0.7
+    acceptable: 0.6
+
+# Outreach Agent Configuration
+outreach_agent:
+  daily_outreach_limit: 50
+  default_strategy: "personalized"
+
+  personalization:
+    level: "high"  # low, medium, high
+    min_score_for_high: 0.8
+    include_mutual_connections: true
+    include_shared_experience: true
+
+  templates:
+    initial_outreach:
+      tone: "professional_friendly"
+      length: "medium"  # short (100-150), medium (150-250), long (250-400)
+
+    inmail:
+      max_length: 1900  # LinkedIn InMail limit
+      subject_max_length: 200
+
+    connection_request:
+      max_length: 300  # LinkedIn connection note limit
+
+  rate_limiting:
+    messages_per_hour: 10
+    connections_per_day: 20
+    inmails_per_week: 30
+
+# Follow-up Agent Configuration
+followup_agent:
+  max_follow_ups: 3
+
+  follow_up_intervals:
+    first: 3    # days after initial outreach
+    second: 7   # days after first follow-up
+    final: 14   # days after second follow-up
+
+  response_analysis:
+    enable_sentiment_analysis: true
+    enable_intent_detection: true
+    confidence_threshold: 0.7
+
+  interview_scheduling:
+    default_duration_minutes: 30
+    buffer_minutes: 15
+    business_hours:
+      start: "09:00"
+      end: "17:00"
+    exclude_weekends: true
+
+# Pipeline Configuration
+pipeline:
+  default_outreach_count: 20
+  target_candidate_count: 50
+
+  stages:
+    search:
+      enabled: true
+      parallel_strategies: false
+
+    scoring:
+      enabled: true
+      concurrent_scoring: true
+
+    outreach:
+      enabled: true
+      batch_size: 10
+      delay_between_batches_minutes: 30
+
+    followup:
+      enabled: true
+      auto_schedule: true
+
+# LinkedIn API Configuration (would need actual credentials)
+linkedin_api:
+  rate_limits:
+    search_per_day: 1000
+    profile_views_per_day: 100
+    inmails_per_month: 50
+
+  retry_policy:
+    max_retries: 3
+    backoff_factor: 2
+    retry_on_status: [429, 500, 502, 503, 504]
+
+# Knowledge Graph Configuration
+knowledge_graph:
+  uri: "bolt://localhost:7687"
+  database: "recruiter"
+
+  connection_pool:
+    max_connections: 50
+    connection_timeout_seconds: 30
+
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+
+  file_logging:
+    enabled: true
+    directory: "./logs"
+    max_size_mb: 10
+    backup_count: 5
+
+  agent_logging:
+    log_tasks: true
+    log_results: true
+    log_errors: true
+
+# Monitoring and Metrics
+monitoring:
+  enable_metrics: true
+  metrics_interval_seconds: 60
+
+  track:
+    - candidates_processed
+    - messages_sent
+    - response_rate
+    - interview_conversion_rate
+    - time_to_hire
+
+# Feature Flags
+features:
+  adaptive_pipeline: true
+  parallel_search: true
+  continuous_sourcing: true
+  auto_followup: true
+  response_processing: true
+  diversity_scoring: true

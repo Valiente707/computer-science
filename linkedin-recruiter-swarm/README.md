@@ -118,7 +118,29 @@ The coordinator orchestrates all agents to execute complex recruiting workflows:
 - Neo4j database (for knowledge graph)
 - LinkedIn API credentials
 
-### Setup
+### Quick Start (Recommended)
+
+Use the automated setup script:
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd linkedin-recruiter-swarm
+
+# Run quick start script (sets up everything)
+chmod +x quickstart.sh
+./quickstart.sh
+```
+
+This will:
+- Start Neo4j in Docker
+- Create Python virtual environment
+- Install dependencies
+- Setup database schema
+- Load sample data
+- Test the connection
+
+### Manual Setup
 
 1. Clone the repository:
 ```bash
@@ -126,27 +148,55 @@ git clone <repository-url>
 cd linkedin-recruiter-swarm
 ```
 
-2. Install dependencies:
+2. **Setup Neo4j Database**:
+
+**Option A: Docker (Recommended)**
 ```bash
+# Start Neo4j with Docker Compose
+docker-compose up -d
+
+# Wait for Neo4j to start (30-60 seconds)
+# Access at http://localhost:7474
+# Username: neo4j, Password: recruiter123
+```
+
+**Option B: Neo4j Desktop**
+- Download from https://neo4j.com/download/
+- Create new database named "recruiter"
+- Set password to "recruiter123"
+- Start the database
+
+📖 **Detailed Neo4j Setup Guide**: See [docs/NEO4J_SETUP.md](docs/NEO4J_SETUP.md)
+
+3. Install Python dependencies:
+```bash
+# Create virtual environment
+python3 -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
 pip install -r requirements.txt
 ```
 
-3. Configure environment:
+4. Configure environment:
 ```bash
 cp .env.example .env
-# Edit .env with your API credentials
+# Edit .env with your credentials (or use defaults for local dev)
 ```
 
-4. Configure swarm settings:
+5. Setup database schema and sample data:
+```bash
+# Test connection
+python test_neo4j.py
+
+# Setup schema and load sample data
+python setup_neo4j.py --sample-data
+```
+
+6. Configure swarm settings (optional):
 ```bash
 # Edit config/swarm_config.yaml with your preferences
-```
-
-5. Setup Neo4j knowledge graph:
-```bash
-# Start Neo4j instance
-# Create database named 'recruiter'
-# Update NEO4J_* environment variables
+nano config/swarm_config.yaml
 ```
 
 ## Usage

@@ -1,0 +1,1175 @@
+{
+  "name": "Gamma AI to Socials",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "daysInterval": 7
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        2656,
+        728
+      ],
+      "id": "436a6614-363a-49b2-a736-ea33c6776575",
+      "name": "Schedule Trigger",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "url": "https://www.techbuzz.ai/api/rss/articles",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.rssFeedRead",
+      "typeVersion": 1.2,
+      "position": [
+        3104,
+        728
+      ],
+      "id": "52ca62bd-1553-4ba9-b896-2c09971d76cd",
+      "name": "RSS Read"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1SobvCJj7-iEuUXWqLyUMY3PDSI2undZUsDaXNq697aI",
+          "mode": "list",
+          "cachedResultName": "NEW_gamma_templates",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SobvCJj7-iEuUXWqLyUMY3PDSI2undZUsDaXNq697aI/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Sheet1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1SobvCJj7-iEuUXWqLyUMY3PDSI2undZUsDaXNq697aI/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [
+            "gamma_url"
+          ],
+          "schema": [
+            {
+              "id": "Prompt",
+              "displayName": "Prompt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Caption",
+              "displayName": "Caption",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Posted?",
+              "displayName": "Posted?",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "creator",
+              "displayName": "creator",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "title",
+              "displayName": "title",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "link",
+              "displayName": "link",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "pubDate",
+              "displayName": "pubDate",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "content:encoded",
+              "displayName": "content:encoded",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "content:encodedSnippet",
+              "displayName": "content:encodedSnippet",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "dc:creator",
+              "displayName": "dc:creator",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "content",
+              "displayName": "content",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "contentSnippet",
+              "displayName": "contentSnippet",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "guid",
+              "displayName": "guid",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "categories",
+              "displayName": "categories",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "isoDate",
+              "displayName": "isoDate",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "text",
+              "displayName": "text",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "gamma_url",
+              "displayName": "gamma_url",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "generationId",
+              "displayName": "generationId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "status",
+              "displayName": "status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        6816,
+        560
+      ],
+      "id": "df1a10a2-0700-407d-8fd6-a855b4450795",
+      "name": "Append or update row in sheet",
+      "executeOnce": false,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Xq627EAlmglfPLty",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Create the VP Insider executive AI briefing for {{$json.target_period}}.\n\nNEWS ITEMS:\n{{$json.news_items}}\n\nOutput format:\n1) VP Insider AI Trends Briefing — {{$json.target_period}}\n2) Executive Summary (2–4 sentences)\n3) Top AI Developments (3–7 bullets: What happened → Why it matters → Action)\n4) Watchlist (2–4 developing AI risks/unknowns)\n5) Next 7 Days (3–5 strategic AI actions)",
+        "hasOutputParser": true,
+        "messages": {
+          "messageValues": [
+            {
+              "message": "=You are an executive AI strategy analyst with a mission to research and create a report that is optimized for business executives looking to learn AI insights and find ways to boost ROI when adding AI technology to their company's business processes.\n\nTIME RULE (NON-NEGOTIABLE):\n- The current period is {{$json.target_period}}.\n- Never imply a different 'current year' than {{$json.target_year}}.\n- If older items appear, label them 'Stale (outside {{$json.target_period}})' and do not anchor conclusions on them.\n\nQUALITY RULES:\n- No hype, no generic AI explanations.\n- Focus on the newest AI trends & connected technology breakthroughs, business impact (ROI, costs, etc.), competitive implications and strategic actions. Choose one of the most innovative of the content articles that are provided in the RSS Read source and highlight as part of the output."
+            }
+          ]
+        },
+        "batching": {
+          "batchSize": 5
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.chainLlm",
+      "typeVersion": 1.8,
+      "position": [
+        4672,
+        736
+      ],
+      "id": "3ad7c814-be27-4e73-bab5-ab5425c3623d",
+      "name": "Basic LLM Chain"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4.1-mini"
+        },
+        "builtInTools": {},
+        "options": {
+          "maxTokens": 500,
+          "textFormat": {
+            "textOptions": {
+              "type": "json_schema"
+            }
+          },
+          "temperature": 0.4
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        4744,
+        952
+      ],
+      "id": "4b050bab-35fa-4ae5-bc0e-777029ba7c82",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "yNzNYcSnxqGZSe8W",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        4000,
+        728
+      ],
+      "id": "342ecd01-a4e8-47b3-b43d-91313f30f987",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e3326aba-b898-470a-afff-b912453ae52a",
+              "name": "run_metadata",
+              "value": "=={{ JSON.stringify({ runId: $execution.id, ts: $now, items: $json.data?.length ?? 0 }) }}",
+              "type": "string"
+            },
+            {
+              "id": "963d216d-be17-4eb6-ab72-ce98a6d46a00",
+              "name": "llm_input",
+              "value": "=={{ $json.data.map((a, i) => `${i+1}. ${a.title}\\n${a.link}\\n${(a['content:encoded'] || a.content || '').toString()}`).join('\\n\\n---\\n\\n') }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        4224,
+        728
+      ],
+      "id": "fb1ba087-91a9-4cfd-b843-8568624f2547",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "c7cb3bf2-395e-4187-8e05-42c3569d3444",
+              "name": "gamma_url",
+              "value": "={{ $json.gammaUrl || $json.gamma_url || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "016aeabe-1a9a-4fef-b7e6-b4f32f1020ef",
+              "name": "status",
+              "value": "={{ $json.status || \"\" }}",
+              "type": "string"
+            },
+            {
+              "id": "2238d406-6a44-4293-927e-2977be3f0e2d",
+              "name": "generationId",
+              "value": "={{ $json.generationId || \"\" }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        6592,
+        560
+      ],
+      "id": "8263ddf4-042b-4ab8-ab38-cb86de7761af",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "amount": 15
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        5472,
+        728
+      ],
+      "id": "9d12a01f-802d-490f-b170-64cce48c1703",
+      "name": "Wait",
+      "webhookId": "dae744ee-3ead-4626-a3d2-15f50a24962b"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "98070200-73a3-40b5-8bf5-edbb53e34f7b",
+              "leftValue": "={{ $json.status }}",
+              "rightValue": "completed",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "f1bf70d2-6a7c-4a77-bdc0-65f7ca5b512a",
+              "leftValue": "={{ $json.retry_count ?? 0 }}",
+              "rightValue": 12,
+              "operator": {
+                "type": "number",
+                "operation": "lt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        6368,
+        656
+      ],
+      "id": "8569fdc3-2c01-43cf-8f79-707ed3483b98",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "07c3033e-6680-46ab-86d4-a74efa010a1a",
+              "name": "retry_count",
+              "value": 0,
+              "type": "number"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        5696,
+        728
+      ],
+      "id": "3184adcb-27a0-45c2-bbff-9f98dc96fbf2",
+      "name": "Initial Retry Count"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "9aa59679-a2aa-461d-bca3-502eb2bf4ca0",
+              "leftValue": "={{$json.gamma_url}}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        7040,
+        560
+      ],
+      "id": "17eca48a-28a0-4554-b832-2790237208c5",
+      "name": "If1"
+    },
+    {
+      "parameters": {
+        "errorMessage": "No Gamma post made!!!"
+      },
+      "type": "n8n-nodes-base.stopAndError",
+      "typeVersion": 1,
+      "position": [
+        7264,
+        656
+      ],
+      "id": "7973c824-68bd-4867-b965-2e2fcef8b89a",
+      "name": "Stop and Error"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://public-api.gamma.app/v1.0/generations",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-KEY",
+              "value": "YOUR_GAMMA_API_KEY"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{\n  JSON.stringify({\n    format: \"presentation\",\n    inputText: (\n      ($json.gamma_inputText || \"\")\n        // convert literal backslash-n into real newlines\n        .replaceAll(\"\\\\r\\\\n\", \"\\n\")\n        .replaceAll(\"\\\\n\", \"\\n\")\n        .replaceAll(\"\\\\r\", \"\\n\")\n\n        // enforce strong card breaks Gamma recognizes\n        .replace(/\\n{2,}/g, \"\\n\\n\")\n        .replace(/\\n(?=\\d+\\)\\s)/g, \"\\n\\n\")     // blank line before \"1) 2) 3)\"\n        .replace(/\\n\\n(?=\\d+\\)\\s)/g, \"\\n\\n---\\n\\n\") // separator between sections\n    ),\n    textMode: \"preserve\",\n    cardSplit: \"inputTextBreaks\"\n  })\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        5248,
+        728
+      ],
+      "id": "714d2ac0-b85a-4d7f-80be-d613f8f357f2",
+      "name": "Gamma – Create Presentation (POST)"
+    },
+    {
+      "parameters": {
+        "url": "=https://public-api.gamma.app/v1.0/generations/{{ $json.generationId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-API-KEY",
+              "value": "YOUR_GAMMA_API_KEY"
+            },
+            {
+              "name": "Accept",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        6144,
+        728
+      ],
+      "id": "4718d488-7aca-45b0-ad56-fe90e9821609",
+      "name": "HTTP- GET Gamma"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "a2819707-34df-4961-add8-cbd4b82b96f8",
+              "name": "gamma_inputText",
+              "value": "={{ ($json.gamma_inputText || '').replaceAll('\\\\n', '\\n') }}",
+              "type": "string"
+            },
+            {
+              "id": "1257c66c-9f6a-444f-b22e-53c0c28ab370",
+              "name": "",
+              "value": "",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        7040,
+        824
+      ],
+      "id": "4a825e0a-05c2-42f9-bea2-592f85530db3",
+      "name": "Edit Fields2"
+    },
+    {
+      "parameters": {
+        "jsCode": "const raw = $json.text ?? \"\";\n\n// 1) Safely extract message (handles JSON-stringified LLM outputs)\nlet msg = raw;\ntry {\n  const parsed = JSON.parse(raw);\n  msg = (parsed?.message ?? parsed?.text ?? raw);\n} catch {}\n\n// 2) Normalize literal escaped newlines first, then normalize CRLF\nmsg = String(msg)\n  .replaceAll(\"\\\\\\\\r\\\\\\\\n\", \"\\n\")\n  .replaceAll(\"\\\\\\\\n\", \"\\n\")\n  .replaceAll(\"\\\\\\\\r\", \"\\n\")\n  .replaceAll(\"\\r\\n\", \"\\n\")\n  .replaceAll(\"\\r\", \"\\n\");\n\n// 3) Strip a common prefix if it appears\nmsg = msg.replace(/^=\\-\\s*/, \"\");\n\n// 4) Force Gamma-detectable \"text breaks\" (blank line paragraphing)\nmsg = msg\n  .replace(/\\n{3,}/g, \"\\n\\n\")          // collapse excessive spacing\n  .replace(/\\n-\\s/g, \"\\n\\n- \")         // blank line before bullets\n  .replace(/\\n(\\d+\\)\\s)/g, \"\\n\\n$1\");  // blank line before numbered sections like \"1) \"\n\n// 5) Build a safe period header (NO undefined)\nconst year =\n  $json.target_year ??\n  new Date().getFullYear();\n\nconst quarter =\n  $json.target_quarter ??\n  `Q${Math.floor(new Date().getMonth() / 3) + 1}`;\n\nconst targetPeriod =\n  $json.target_period ??\n  `${quarter} ${year}`;\n\n// Remove any existing TECH HIGHLIGHTS header (prevents duplicates)\nmsg = msg.replace(/^TECH HIGHLIGHTS.*\\n+/i, \"\");\n\n// Prepend correct header + a blank line\nmsg = `TECH HIGHLIGHTS — ${targetPeriod}\\n\\n${msg}`;\n\n// Final cleanup: ensure at least one paragraph break exists\nif (!msg.includes(\"\\n\\n\")) {\n  msg = msg.replace(/\\n/g, \"\\n\\n\");\n}\n\nreturn [{\n  json: {\n    ...$json,\n    gamma_inputText: msg,\n    target_year: year,\n    target_quarter: quarter,\n    target_period: targetPeriod,\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5024,
+        728
+      ],
+      "id": "fa157cd6-cc6c-458e-9177-8559fa5f483d",
+      "name": "Code in JavaScript"
+    },
+    {
+      "parameters": {
+        "amount": 10
+      },
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        6592,
+        752
+      ],
+      "id": "e8f3b33b-c163-462a-a8f3-8d0ac4f2f373",
+      "name": "Wait If",
+      "webhookId": "d6484363-3af2-4ae4-8ac4-a56c7625ef66"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Retry increment node\n// Runs after a failed GET and before looping back to GET again.\nreturn items.map(item => {\n  const json = item.json ?? {};\n  return {\n    ...item,\n    json: {\n      ...json,\n      retry_count: (json.retry_count ?? 0) + 1,\n    },\n  };\n});"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        6816,
+        824
+      ],
+      "id": "12d49f67-0c45-4ded-bec9-59b768420671",
+      "name": "Retry Increment"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "929309f5-04a5-42f0-bfea-7ce770598727",
+              "name": "retry_count",
+              "value": "={{ $json.retry_count ?? 0 }}\n",
+              "type": "number"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "include": "selected",
+        "includeFields": "generationId",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        5920,
+        728
+      ],
+      "id": "aed343a6-827c-45b2-88ad-2f03ed4123ea",
+      "name": "Edit Fields3"
+    },
+    {
+      "parameters": {
+        "postAs": "organization",
+        "organization": "105216472",
+        "text": "={{ \n  \"🚨 VP Insider Briefing 🚨\\n\\n\"\n  + ($json.llm_output || $json.summary || $json.output || \"\").trim()\n  + \"\\n\\n🔗 Full briefing: \"\n  + ($json.gamma_url || \"\")\n  + \"\\n\\n#AI #ExecutiveBriefing #BespokeAI #AILeadership\"\n}}",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [
+        7264,
+        464
+      ],
+      "id": "55889161-376a-4c2a-ba5d-81d9fc89cd1f",
+      "name": "Create a post",
+      "credentials": {
+        "linkedInOAuth2Api": {
+          "id": "IV2n2TkWDEAKIBDU",
+          "name": "LinkedIn account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// This node prepares a safe, compact prompt string for the LLM.\n// It prevents JSON breakage from quotes/newlines/backslashes and truncates huge bodies.\n\nconst now = new Date();\nconst year = now.getFullYear();\nconst quarter = `Q${Math.floor(now.getMonth() / 3) + 1}`;\n\nconst maxBodyChars = 2000;    // per item\nconst maxTotalChars = 12000;  // overall prompt cap\n\nfunction parseDate(d) {\n  const dt = new Date(d);\n  return isNaN(dt.getTime()) ? null : dt;\n}\n\n// Keep items from last ~120 days (buffer). If dates are missing/invalid, keep them.\nconst cutoff = new Date(now.getTime() - 120 * 24 * 60 * 60 * 1000);\n\nfunction clean(s) {\n  return (s ?? \"\")\n    .toString()\n    .replace(/\\r\\n/g, \"\\n\")\n    .replace(/\\r/g, \"\\n\")\n    .replace(/\\u0000/g, \"\")\n    .replace(/[""]/g, '\"')\n    .replace(/['']/g, \"'\");\n}\n\n// Pull all incoming items ONCE\nconst allItems = $input.all();\n\n// Filter once, then choose filtered if it produced anything\nconst filteredItems = allItems.filter((it) => {\n  const d = parseDate(it.json.pubDate || it.json.date || it.json.published || \"\");\n  return d ? d >= cutoff : true;\n});\n\nconst items = filteredItems.length ? filteredItems : allItems;\n\nconst blocks = items.map((it, idx) => {\n  const j = it.json;\n\n  const title = clean(j.title);\n  const source = clean(j.creator || j.source || \"\");\n  const date = clean(j.pubDate || j.date || j.published || \"\");\n  const link = clean(j.link || j.url || \"\");\n\n  const bodyRaw = j[\"content:encoded\"] || j.content || j.description || \"\";\n  const body = clean(bodyRaw).slice(0, maxBodyChars);\n\n  return `#${idx + 1} ${title}\\nSource: ${source}\\nDate: ${date}\\nLink: ${link}\\nBody: ${body}`;\n});\n\nlet newsItems = blocks.join(\"\\n\\n---\\n\\n\");\n\n// hard cap overall size\nif (newsItems.length > maxTotalChars) {\n  newsItems = newsItems.slice(0, maxTotalChars) + \"\\n\\n[TRUNCATED]\";\n}\n\nconst targetPeriod = `${quarter} ${year}`;\nconst briefingFrame =\n  `TARGET_PERIOD: ${targetPeriod}\\n` +\n  `RULE: Treat ${targetPeriod} as current. Do not reference prior years unless explicitly labeled as historical.\\n\\n`;\n\nnewsItems = briefingFrame + newsItems;\n\nreturn [{\n  json: {\n    target_year: year,\n    target_quarter: quarter,\n    target_period: targetPeriod,\n    news_items: newsItems\n  }\n}];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4448,
+        728
+      ],
+      "id": "b0e387b5-0f56-425c-bb0e-19ed2272be40",
+      "name": "Code in JavaScript1"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.perplexity.ai/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer YOUR_PERPLEXITY_API_KEY"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "raw",
+        "rawContentType": "application/json",
+        "body": "={{ JSON.stringify({\n  model: \"sonar-pro\",\n  messages: [\n    {\n      role: \"system\",\n      content: \"You are an AI research analyst for executives at growing companies. Review the batch of RSS items, extract business-relevant AI insights, verify key claims using reliable sources, and include citations.\"\n    },\n    {\n      role: \"user\",\n      content: $json.batch_prompt\n    }\n  ]\n}) }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
+      "position": [
+        3776,
+        728
+      ],
+      "id": "7524e62f-ee4f-4019-ab8c-c479e9b26022",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        3328,
+        728
+      ],
+      "id": "9cfd41dd-bd8e-4a46-a0dc-a30a03c65b48",
+      "name": "Aggregate1"
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "={{\n  {\n    \"batch_prompt\": $json.data\n      .slice(0, 8)\n      .map((a, i) => {\n        const snippet =\n          (a['content:encodedSnippet'] ??\n           a.contentSnippet ??\n           '')\n          .slice(0, 400);\n\n        return [\n          `ITEM ${i + 1}`,\n          `Title: ${a.title}`,\n          `Source: ${a.creator}`,\n          `Link: ${a.link}`,\n          `Snippet: ${snippet}`\n        ].join('\\n');\n      })\n      .join('\\n\\n')\n  }\n}}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        3552,
+        728
+      ],
+      "id": "9441e637-cff4-41c3-8243-e238db8ab357",
+      "name": "Edit Fields4"
+    },
+    {
+      "parameters": {
+        "httpRequestMethod": "POST",
+        "graphApiVersion": "v23.0",
+        "node": "1388315935828433",
+        "edge": "feed",
+        "options": {
+          "queryParameters": {
+            "parameter": [
+              {
+                "name": "message",
+                "value": "={{ \"🚨 VP Insider Briefing 🚨\\n\\n\" + ($json.llm_output || $json.summary || $json.output || \"\").trim() + \"\\n\\n🔗 Full briefing: \" + ($json.gamma_url || \"\") + \"\\n\\n#AI #ExecutiveBriefing #BespokeAI #AILeadership\" }}"
+              }
+            ]
+          }
+        }
+      },
+      "id": "8583b681-2519-4cfb-a86f-f54c160db8c2",
+      "name": "Post to Facebook",
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        7488,
+        464
+      ],
+      "credentials": {
+        "facebookGraphApi": {
+          "id": "5vBaz1EYzVt3q8oU",
+          "name": "Facebook Graph account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "rss_feed_url",
+              "value": "https://www.techbuzz.ai/api/rss/articles",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "gamma_api_key",
+              "value": "YOUR_GAMMA_API_KEY",
+              "type": "string"
+            },
+            {
+              "id": "id-3",
+              "name": "perplexity_api_key",
+              "value": "YOUR_PERPLEXITY_API_KEY",
+              "type": "string"
+            },
+            {
+              "id": "id-4",
+              "name": "linkedin_org_id",
+              "value": "105216472",
+              "type": "string"
+            },
+            {
+              "id": "id-5",
+              "name": "google_sheet_id",
+              "value": "1SobvCJj7-iEuUXWqLyUMY3PDSI2undZUsDaXNq697aI",
+              "type": "string"
+            },
+            {
+              "id": "id-6",
+              "name": "facebook_page_id",
+              "value": "1388315935828433",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "id": "190af8ed-63d3-45ae-b948-fa1dae6c6dce",
+      "name": "Workflow Configuration",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        2880,
+        728
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "RSS Read": {
+      "main": [
+        [
+          {
+            "node": "Aggregate1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "If1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Basic LLM Chain": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Code in JavaScript1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait": {
+      "main": [
+        [
+          {
+            "node": "Initial Retry Count",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If1": {
+      "main": [
+        [
+          {
+            "node": "Create a post",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Stop and Error",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Initial Retry Count": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gamma – Create Presentation (POST)": {
+      "main": [
+        [
+          {
+            "node": "Wait",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP- GET Gamma": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript": {
+      "main": [
+        [
+          {
+            "node": "Gamma – Create Presentation (POST)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait If": {
+      "main": [
+        [
+          {
+            "node": "Retry Increment",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Retry Increment": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "HTTP- GET Gamma",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields3": {
+      "main": [
+        [
+          {
+            "node": "HTTP- GET Gamma",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code in JavaScript1": {
+      "main": [
+        [
+          {
+            "node": "Basic LLM Chain",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields4": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create a post": {
+      "main": [
+        [
+          {
+            "node": "Post to Facebook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Workflow Configuration",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Workflow Configuration": {
+      "main": [
+        [
+          {
+            "node": "RSS Read",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "saveManualExecutions": false,
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "7bb16e58-701b-42fc-aea5-61632583d7e7",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "8ecce6b77550166ba330ecaaffb0587d710ad3b380bf333cf655ba42f213947b"
+  },
+  "id": "ogM8z8UHPGHkF6Iu",
+  "tags": []
+}

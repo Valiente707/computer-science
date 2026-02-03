@@ -786,35 +786,31 @@
     },
     {
       "parameters": {
-        "httpRequestMethod": "POST",
-        "graphApiVersion": "v23.0",
-        "node": "1388315935828433",
-        "edge": "feed",
-        "options": {
-          "queryParameters": {
-            "parameter": [
-              {
-                "name": "message",
-                "value": "={{ \"🚨 VP Insider Briefing 🚨\\n\\n\" + ($json.llm_output || $json.summary || $json.output || \"\").trim() + \"\\n\\n🔗 Full briefing: \" + ($json.gamma_url || \"\") + \"\\n\\n#AI #ExecutiveBriefing #BespokeAI #AILeadership\" }}"
-              }
-            ]
-          }
-        }
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v23.0/{{ $json.facebook_page_id || '1388315935828433' }}/feed",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "access_token",
+              "value": "={{ $json.facebook_access_token || 'YOUR_FACEBOOK_ACCESS_TOKEN' }}"
+            },
+            {
+              "name": "message",
+              "value": "={{ \"🚨 VP Insider Briefing 🚨\\n\\n\" + ($json.llm_output || $json.summary || $json.output || \"\").trim() + \"\\n\\n🔗 Full briefing: \" + ($json.gamma_url || \"\") + \"\\n\\n#AI #ExecutiveBriefing #BespokeAI #AILeadership\" }}"
+            }
+          ]
+        },
+        "options": {}
       },
       "id": "8583b681-2519-4cfb-a86f-f54c160db8c2",
       "name": "Post to Facebook",
-      "type": "n8n-nodes-base.facebookGraphApi",
-      "typeVersion": 1,
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.3,
       "position": [
         7488,
         464
-      ],
-      "credentials": {
-        "facebookGraphApi": {
-          "id": "5vBaz1EYzVt3q8oU",
-          "name": "Facebook Graph account"
-        }
-      }
+      ]
     },
     {
       "parameters": {
@@ -854,6 +850,12 @@
               "id": "id-6",
               "name": "facebook_page_id",
               "value": "1388315935828433",
+              "type": "string"
+            },
+            {
+              "id": "id-7",
+              "name": "facebook_access_token",
+              "value": "YOUR_FACEBOOK_ACCESS_TOKEN",
               "type": "string"
             }
           ]

@@ -680,7 +680,7 @@
         },
         "includeOtherFields": true,
         "include": "selected",
-        "includeFields": "generationId",
+        "includeFields": "generationId, facebook_page_id, facebook_access_token",
         "options": {}
       },
       "type": "n8n-nodes-base.set",
@@ -716,7 +716,7 @@
     },
     {
       "parameters": {
-        "jsCode": "// This node prepares a safe, compact prompt string for the LLM.\n// It prevents JSON breakage from quotes/newlines/backslashes and truncates huge bodies.\n\nconst now = new Date();\nconst year = now.getFullYear();\nconst quarter = `Q${Math.floor(now.getMonth() / 3) + 1}`;\n\nconst maxBodyChars = 2000;    // per item\nconst maxTotalChars = 12000;  // overall prompt cap\n\nfunction parseDate(d) {\n  const dt = new Date(d);\n  return isNaN(dt.getTime()) ? null : dt;\n}\n\n// Keep items from last ~120 days (buffer). If dates are missing/invalid, keep them.\nconst cutoff = new Date(now.getTime() - 120 * 24 * 60 * 60 * 1000);\n\nfunction clean(s) {\n  return (s ?? \"\")\n    .toString()\n    .replace(/\\r\\n/g, \"\\n\")\n    .replace(/\\r/g, \"\\n\")\n    .replace(/\\u0000/g, \"\")\n    .replace(/[""]/g, '\"')\n    .replace(/['']/g, \"'\");\n}\n\n// Pull all incoming items ONCE\nconst allItems = $input.all();\n\n// Filter once, then choose filtered if it produced anything\nconst filteredItems = allItems.filter((it) => {\n  const d = parseDate(it.json.pubDate || it.json.date || it.json.published || \"\");\n  return d ? d >= cutoff : true;\n});\n\nconst items = filteredItems.length ? filteredItems : allItems;\n\nconst blocks = items.map((it, idx) => {\n  const j = it.json;\n\n  const title = clean(j.title);\n  const source = clean(j.creator || j.source || \"\");\n  const date = clean(j.pubDate || j.date || j.published || \"\");\n  const link = clean(j.link || j.url || \"\");\n\n  const bodyRaw = j[\"content:encoded\"] || j.content || j.description || \"\";\n  const body = clean(bodyRaw).slice(0, maxBodyChars);\n\n  return `#${idx + 1} ${title}\\nSource: ${source}\\nDate: ${date}\\nLink: ${link}\\nBody: ${body}`;\n});\n\nlet newsItems = blocks.join(\"\\n\\n---\\n\\n\");\n\n// hard cap overall size\nif (newsItems.length > maxTotalChars) {\n  newsItems = newsItems.slice(0, maxTotalChars) + \"\\n\\n[TRUNCATED]\";\n}\n\nconst targetPeriod = `${quarter} ${year}`;\nconst briefingFrame =\n  `TARGET_PERIOD: ${targetPeriod}\\n` +\n  `RULE: Treat ${targetPeriod} as current. Do not reference prior years unless explicitly labeled as historical.\\n\\n`;\n\nnewsItems = briefingFrame + newsItems;\n\nreturn [{\n  json: {\n    target_year: year,\n    target_quarter: quarter,\n    target_period: targetPeriod,\n    news_items: newsItems\n  }\n}];"
+        "jsCode": "// This node prepares a safe, compact prompt string for the LLM.\n// It prevents JSON breakage from quotes/newlines/backslashes and truncates huge bodies.\n\nconst now = new Date();\nconst year = now.getFullYear();\nconst quarter = `Q${Math.floor(now.getMonth() / 3) + 1}`;\n\nconst maxBodyChars = 2000;    // per item\nconst maxTotalChars = 12000;  // overall prompt cap\n\nfunction parseDate(d) {\n  const dt = new Date(d);\n  return isNaN(dt.getTime()) ? null : dt;\n}\n\n// Keep items from last ~120 days (buffer). If dates are missing/invalid, keep them.\nconst cutoff = new Date(now.getTime() - 120 * 24 * 60 * 60 * 1000);\n\nfunction clean(s) {\n  return (s ?? \"\")\n    .toString()\n    .replace(/\\r\\n/g, \"\\n\")\n    .replace(/\\r/g, \"\\n\")\n    .replace(/\\u0000/g, \"\")\n    .replace(/[""]/g, '\"')\n    .replace(/['']/g, \"'\");\n}\n\n// Pull all incoming items ONCE\nconst allItems = $input.all();\n\n// Filter once, then choose filtered if it produced anything\nconst filteredItems = allItems.filter((it) => {\n  const d = parseDate(it.json.pubDate || it.json.date || it.json.published || \"\");\n  return d ? d >= cutoff : true;\n});\n\nconst items = filteredItems.length ? filteredItems : allItems;\n\nconst blocks = items.map((it, idx) => {\n  const j = it.json;\n\n  const title = clean(j.title);\n  const source = clean(j.creator || j.source || \"\");\n  const date = clean(j.pubDate || j.date || j.published || \"\");\n  const link = clean(j.link || j.url || \"\");\n\n  const bodyRaw = j[\"content:encoded\"] || j.content || j.description || \"\";\n  const body = clean(bodyRaw).slice(0, maxBodyChars);\n\n  return `#${idx + 1} ${title}\\nSource: ${source}\\nDate: ${date}\\nLink: ${link}\\nBody: ${body}`;\n});\n\nlet newsItems = blocks.join(\"\\n\\n---\\n\\n\");\n\n// hard cap overall size\nif (newsItems.length > maxTotalChars) {\n  newsItems = newsItems.slice(0, maxTotalChars) + \"\\n\\n[TRUNCATED]\";\n}\n\nconst targetPeriod = `${quarter} ${year}`;\nconst briefingFrame =\n  `TARGET_PERIOD: ${targetPeriod}\\n` +\n  `RULE: Treat ${targetPeriod} as current. Do not reference prior years unless explicitly labeled as historical.\\n\\n`;\n\nnewsItems = briefingFrame + newsItems;\n\n// Preserve facebook configuration from upstream\nconst firstItem = allItems[0]?.json || {};\n\nreturn [{\n  json: {\n    target_year: year,\n    target_quarter: quarter,\n    target_period: targetPeriod,\n    news_items: newsItems,\n    facebook_page_id: firstItem.facebook_page_id || '1388315935828433',\n    facebook_access_token: firstItem.facebook_access_token || 'YOUR_FACEBOOK_ACCESS_TOKEN'\n  }\n}];"
       },
       "type": "n8n-nodes-base.code",
       "typeVersion": 2,
@@ -772,7 +772,7 @@
     {
       "parameters": {
         "mode": "raw",
-        "jsonOutput": "={{\n  {\n    \"batch_prompt\": $json.data\n      .slice(0, 8)\n      .map((a, i) => {\n        const snippet =\n          (a['content:encodedSnippet'] ??\n           a.contentSnippet ??\n           '')\n          .slice(0, 400);\n\n        return [\n          `ITEM ${i + 1}`,\n          `Title: ${a.title}`,\n          `Source: ${a.creator}`,\n          `Link: ${a.link}`,\n          `Snippet: ${snippet}`\n        ].join('\\n');\n      })\n      .join('\\n\\n')\n  }\n}}",
+        "jsonOutput": "={{\n  {\n    \"batch_prompt\": $json.data\n      .slice(0, 8)\n      .map((a, i) => {\n        const snippet =\n          (a['content:encodedSnippet'] ??\n           a.contentSnippet ??\n           '')\n          .slice(0, 400);\n\n        return [\n          `ITEM ${i + 1}`,\n          `Title: ${a.title}`,\n          `Source: ${a.creator}`,\n          `Link: ${a.link}`,\n          `Snippet: ${snippet}`\n        ].join('\\n');\n      })\n      .join('\\n\\n'),\n    \"facebook_page_id\": $json.facebook_page_id || '1388315935828433',\n    \"facebook_access_token\": $json.facebook_access_token || 'YOUR_FACEBOOK_ACCESS_TOKEN'\n  }\n}}",
         "options": {}
       },
       "type": "n8n-nodes-base.set",
@@ -787,13 +787,13 @@
     {
       "parameters": {
         "method": "POST",
-        "url": "=https://graph.facebook.com/v23.0/{{ $json.facebook_page_id || '1388315935828433' }}/feed",
+        "url": "=https://graph.facebook.com/v23.0/{{ $('Workflow Configuration').item.json.facebook_page_id }}/feed",
         "sendQuery": true,
         "queryParameters": {
           "parameters": [
             {
               "name": "access_token",
-              "value": "={{ $json.facebook_access_token || 'YOUR_FACEBOOK_ACCESS_TOKEN' }}"
+              "value": "={{ $('Workflow Configuration').item.json.facebook_access_token }}"
             },
             {
               "name": "message",

@@ -3,3 +3,27 @@
 *.swo
 .direnv/
 .envrc
+
+# Codex local configuration
+.codex/
+
+# Claude Flow / RuFlo runtime data
+.claude-flow/data/
+.claude-flow/logs/
+.claude-flow/sessions/
+.claude-flow/metrics/
+.claude-flow/security/audit-status.json
+.swarm/
+.claude/memory.db
+.claude/memory.db-shm
+.claude/memory.db-wal
+ruvector.db
+ruvector.db-*
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Claude Code local config
+CLAUDE.local.md

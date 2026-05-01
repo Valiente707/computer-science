@@ -3,3 +3,4 @@
 *.swo
 .direnv/
 .envrc
+node_modules/

@@ -3,20 +3,287 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Editframe Project</title>
+    <title>Editframe Demo</title>
     <script type="module" src="./src/index.js"></script>
     <link rel="stylesheet" href="./src/styles.css" />
   </head>
   <body class="h-full w-full m-0 p-0 bg-slate-900">
+
     <ef-timegroup
       workbench
       mode="sequence"
+      overlap="1s"
       class="w-[1920px] h-[1080px] bg-black relative overflow-hidden"
     >
-      <!-- Add your composition here -->
-      <ef-timegroup mode="fixed" duration="5s" class="absolute w-full h-full flex items-center justify-center">
-        <ef-text duration="5s" class="text-white text-4xl">Your video starts here</ef-text>
+
+      <!-- ── Scene 1: Title Card (6s) ── -->
+      <ef-timegroup
+        mode="fixed"
+        duration="6s"
+        class="scene absolute w-full h-full flex flex-col items-center justify-center"
+        style="
+          background: radial-gradient(ellipse at 40% 50%, #1e1b4b 0%, #0f0f0f 70%);
+          animation: 1s fade-out var(--ef-transition-out-start) both;
+        "
+      >
+        <!-- Scan line overlay -->
+        <div class="scan-lines absolute inset-0 pointer-events-none"></div>
+
+        <!-- Top accent bar -->
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-violet-500 via-fuchsia-500 to-cyan-500"></div>
+
+        <!-- Main title — char split -->
+        <ef-text
+          split="char"
+          stagger="40ms"
+          duration="5s"
+          class="text-white font-black tracking-widest uppercase"
+          style="font-size: 9rem; line-height: 1;"
+        >
+          <template>
+            <ef-text-segment class="char-drop"></ef-text-segment>
+          </template>
+          EDITFRAME
+        </ef-text>
+
+        <!-- Subtitle — word split -->
+        <ef-text
+          split="word"
+          stagger="120ms"
+          duration="5s"
+          class="mt-6 text-fuchsia-400 text-4xl font-light tracking-[0.4em] uppercase"
+        >
+          <template>
+            <ef-text-segment class="word-rise" style="animation-delay: calc(var(--ef-stagger-offset) + 600ms)"></ef-text-segment>
+          </template>
+          Motion · Design · Engine
+        </ef-text>
+
+        <!-- Progress bar driven by --ef-progress -->
+        <div class="absolute bottom-16 left-1/2 -translate-x-1/2 w-[600px]">
+          <div class="w-full h-px bg-white/10 rounded-full overflow-hidden">
+            <div
+              class="h-full bg-gradient-to-r from-violet-500 to-fuchsia-500 rounded-full"
+              style="width: calc(var(--ef-progress) * 100%)"
+            ></div>
+          </div>
+        </div>
       </ef-timegroup>
+
+      <!-- ── Scene 2: Feature Showcase (7s) ── -->
+      <ef-timegroup
+        mode="fixed"
+        duration="7s"
+        class="scene absolute w-full h-full"
+        style="
+          background: radial-gradient(ellipse at 60% 50%, #042f2e 0%, #0f0f0f 70%);
+          animation: 1s fade-in 0s both, 1s fade-out var(--ef-transition-out-start) both;
+        "
+      >
+        <div class="scan-lines absolute inset-0 pointer-events-none"></div>
+
+        <!-- Top accent bar -->
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400"></div>
+
+        <!-- Left column: staggered word list -->
+        <div class="absolute left-[12%] top-1/2 -translate-y-1/2 flex flex-col gap-10">
+          <ef-text
+            split="word"
+            stagger="80ms"
+            duration="6s"
+            class="text-emerald-400 font-black uppercase"
+            style="font-size: 5rem; line-height: 1.1;"
+          >
+            <template>
+              <ef-text-segment class="word-slide-right"></ef-text-segment>
+            </template>
+            Compose
+          </ef-text>
+          <ef-text
+            split="word"
+            stagger="80ms"
+            duration="6s"
+            class="text-teal-300 font-black uppercase"
+            style="font-size: 5rem; line-height: 1.1; animation-delay: 300ms;"
+          >
+            <template>
+              <ef-text-segment class="word-slide-right" style="animation-delay: calc(var(--ef-stagger-offset) + 400ms)"></ef-text-segment>
+            </template>
+            Animate
+          </ef-text>
+          <ef-text
+            split="word"
+            stagger="80ms"
+            duration="6s"
+            class="text-cyan-300 font-black uppercase"
+            style="font-size: 5rem; line-height: 1.1;"
+          >
+            <template>
+              <ef-text-segment class="word-slide-right" style="animation-delay: calc(var(--ef-stagger-offset) + 800ms)"></ef-text-segment>
+            </template>
+            Render
+          </ef-text>
+        </div>
+
+        <!-- Right column: circular progress + rotating ring -->
+        <div class="absolute right-[14%] top-1/2 -translate-y-1/2 flex flex-col items-center gap-8">
+          <svg class="w-[380px] h-[380px] -rotate-90" viewBox="0 0 100 100">
+            <!-- Track -->
+            <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="6"/>
+            <!-- Animated fill -->
+            <circle
+              cx="50" cy="50" r="42"
+              fill="none"
+              stroke="url(#ring-grad)"
+              stroke-width="6"
+              stroke-linecap="round"
+              style="
+                stroke-dasharray: 263.9;
+                stroke-dashoffset: calc(263.9 * (1 - var(--ef-progress)));
+              "
+            />
+            <defs>
+              <linearGradient id="ring-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                <stop offset="0%" stop-color="#34d399"/>
+                <stop offset="100%" stop-color="#67e8f9"/>
+              </linearGradient>
+            </defs>
+          </svg>
+          <ef-text duration="6s" class="text-white/50 text-2xl tracking-widest uppercase -mt-4">
+            In Progress
+          </ef-text>
+        </div>
+
+        <!-- Vertical divider -->
+        <div
+          class="absolute left-1/2 -translate-x-px top-[15%] bottom-[15%] w-px bg-white/10"
+          style="background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.15) 30%, rgba(255,255,255,0.15) 70%, transparent);"
+        ></div>
+      </ef-timegroup>
+
+      <!-- ── Scene 3: Outro (5s) ── -->
+      <ef-timegroup
+        mode="fixed"
+        duration="5s"
+        class="scene absolute w-full h-full flex flex-col items-center justify-center gap-12"
+        style="
+          background: radial-gradient(ellipse at 50% 60%, #1c0533 0%, #0f0f0f 70%);
+          animation: 1s fade-in 0s both;
+        "
+      >
+        <div class="scan-lines absolute inset-0 pointer-events-none"></div>
+
+        <!-- Top accent bar -->
+        <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-fuchsia-500 via-rose-500 to-orange-400"></div>
+
+        <!-- Tagline — bounce char animation -->
+        <ef-text
+          split="char"
+          stagger="35ms"
+          duration="4s"
+          class="text-white font-black tracking-tight"
+          style="font-size: 7.5rem; line-height: 1;"
+        >
+          <template>
+            <ef-text-segment class="char-bounce"></ef-text-segment>
+          </template>
+          Build Videos.
+        </ef-text>
+
+        <!-- Sub-line — word fade -->
+        <ef-text
+          split="word"
+          stagger="100ms"
+          duration="4s"
+          class="text-rose-300 text-4xl font-semibold tracking-wide"
+        >
+          <template>
+            <ef-text-segment class="word-rise" style="animation-delay: calc(var(--ef-stagger-offset) + 700ms)"></ef-text-segment>
+          </template>
+          With pure HTML and CSS.
+        </ef-text>
+
+        <!-- Fade-out vignette at end using --ef-progress -->
+        <div
+          class="absolute inset-0 bg-black pointer-events-none"
+          style="opacity: calc(max(0, var(--ef-progress) * 3 - 2))"
+        ></div>
+      </ef-timegroup>
+
     </ef-timegroup>
+
+    <style>
+      /* ── Shared animations ── */
+      @keyframes fade-in {
+        from { opacity: 0; }
+        to   { opacity: 1; }
+      }
+
+      @keyframes fade-out {
+        from { opacity: 1; }
+        to   { opacity: 0; }
+      }
+
+      /* char drop-in from above */
+      @keyframes charDrop {
+        from { opacity: 0; transform: translateY(-60px) scale(1.2); }
+        to   { opacity: 1; transform: translateY(0) scale(1); }
+      }
+
+      .char-drop {
+        display: inline-block;
+        animation: charDrop 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+        animation-delay: var(--ef-stagger-offset);
+      }
+
+      /* word slide up from below */
+      @keyframes wordRise {
+        from { opacity: 0; transform: translateY(30px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+
+      .word-rise {
+        display: inline-block;
+        animation: wordRise 0.5s ease-out both;
+        animation-delay: var(--ef-stagger-offset);
+      }
+
+      /* word slide in from left */
+      @keyframes wordSlideRight {
+        from { opacity: 0; transform: translateX(-50px); }
+        to   { opacity: 1; transform: translateX(0); }
+      }
+
+      .word-slide-right {
+        display: inline-block;
+        animation: wordSlideRight 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+        animation-delay: var(--ef-stagger-offset);
+      }
+
+      /* char bouncy entrance */
+      @keyframes charBounce {
+        0%   { opacity: 0; transform: scale(0) rotate(-15deg); }
+        60%  { transform: scale(1.15) rotate(4deg); }
+        100% { opacity: 1; transform: scale(1) rotate(0); }
+      }
+
+      .char-bounce {
+        display: inline-block;
+        animation: charBounce 0.55s cubic-bezier(0.68, -0.55, 0.265, 1.55) both;
+        animation-delay: var(--ef-stagger-offset);
+      }
+
+      /* Subtle CRT scan-lines */
+      .scan-lines {
+        background-image: repeating-linear-gradient(
+          to bottom,
+          transparent 0px,
+          transparent 3px,
+          rgba(0, 0, 0, 0.15) 3px,
+          rgba(0, 0, 0, 0.15) 4px
+        );
+      }
+    </style>
+
   </body>
 </html>

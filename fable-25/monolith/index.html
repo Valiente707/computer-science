@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MONOLITH — Architecture</title>
+<meta name="description" content="MONOLITH. We build things that outlast their reasons.">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600&family=Libre+Franklin:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{--black:#0E0E0E;--white:#F5F5F2;--grey:#9A9A96;--line:#2a2a2a}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Libre Franklin',sans-serif;font-weight:300;overflow-x:hidden}
+::selection{background:var(--white);color:var(--black)}
+a{color:inherit;text-decoration:none}
+a:focus-visible{outline:1px solid var(--white);outline-offset:4px}
+nav{position:fixed;top:0;left:0;right:0;z-index:10;display:flex;justify-content:space-between;align-items:center;padding:1.6rem 2.5rem;mix-blend-mode:difference}
+.mark{font-family:Archivo,sans-serif;font-weight:600;font-size:1rem;letter-spacing:.42em;text-transform:uppercase}
+nav ul{display:flex;gap:2.2rem;list-style:none;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase}
+nav ul a:hover{opacity:.6}
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 2.5rem;gap:3rem}
+.hero .txt h1{font-family:Archivo,sans-serif;font-weight:400;font-size:clamp(2.8rem,7vw,6rem);line-height:.98;letter-spacing:-.02em}
+.hero .txt .lede{margin-top:2rem;max-width:40ch;line-height:1.9;color:var(--grey);font-size:1rem}
+.hero .txt .idx{margin-top:2.5rem;font-family:Archivo,sans-serif;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
+.build{position:sticky;top:0;height:100vh;display:grid;place-items:center}
+.build svg{width:100%;max-width:520px;overflow:visible}
+.edge{fill:none;stroke:var(--white);stroke-width:1.5;vector-effect:non-scaling-stroke;stroke-dasharray:var(--l);stroke-dashoffset:var(--l)}
+.face{fill:#151515;opacity:0;transition:opacity .8s}
+.face.lit{fill:#1c1c1c}
+body.drawn .face{opacity:1}
+.stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr)}
+.stats div{padding:3rem 2rem;border-right:1px solid var(--line)}
+.stats div:last-child{border-right:0}
+.stats b{font-family:Archivo,sans-serif;font-weight:400;font-size:2.4rem;display:block;letter-spacing:-.02em}
+.stats span{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--grey);margin-top:.6rem;display:block}
+.works{max-width:1200px;margin:0 auto;padding:14vh 2.5rem}
+.works h2{font-family:Archivo,sans-serif;font-weight:600;font-size:.8rem;letter-spacing:.24em;text-transform:uppercase;color:var(--grey);margin-bottom:3rem}
+.proj{display:grid;grid-template-columns:60px 1fr 1fr auto;gap:2rem;align-items:baseline;padding:2.4rem 0;border-top:1px solid var(--line)}
+.proj .n{font-family:Archivo,sans-serif;color:var(--grey)}
+.proj .t{font-family:Archivo,sans-serif;font-weight:400;font-size:clamp(1.4rem,3vw,2.2rem);letter-spacing:-.01em}
+.proj .loc{color:var(--grey);font-size:.9rem}
+.proj .yr{color:var(--grey);text-align:right;font-variant-numeric:tabular-nums}
+.proj:hover .t{color:var(--grey)}
+.credo{padding:16vh 2.5rem;text-align:center;border-top:1px solid var(--line)}
+.credo p{font-family:Archivo,sans-serif;font-weight:400;font-size:clamp(1.6rem,4vw,3rem);line-height:1.25;max-width:22ch;margin:0 auto;letter-spacing:-.01em}
+.credo p em{font-style:normal;color:var(--grey)}
+footer{padding:2.5rem;display:flex;justify-content:space-between;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--grey);border-top:1px solid var(--line)}
+footer a:hover{color:var(--white)}
+@media(max-width:820px){.hero{grid-template-columns:1fr}.build{position:relative;height:60vh}.stats{grid-template-columns:1fr 1fr}.stats div:nth-child(2){border-right:0}.proj{grid-template-columns:40px 1fr;gap:.6rem}.proj .loc,.proj .yr{grid-column:2}.proj .yr{text-align:left}nav ul{display:none}}
+@media(prefers-reduced-motion:reduce){.edge{stroke-dashoffset:0}.face{opacity:1}}
+</style>
+</head>
+<body>
+<nav aria-label="Primary">
+  <span class="mark">Monolith</span>
+  <ul><li><a href="#works">Works</a></li><li><a href="#credo">Studio</a></li><li><a href="#contact">Contact</a></li></ul>
+</nav>
+<header class="hero">
+  <div class="txt">
+    <h1>We build things<br>that outlast<br>their reasons</h1>
+    <p class="lede">A studio for concrete, mass, and the long view. Watch our signature tower assemble itself, line by line, as you read.</p>
+    <p class="idx">Est. 1998 · 41 completed works · Basel</p>
+  </div>
+  <div class="build" aria-hidden="true">
+    <svg viewBox="0 0 300 360" id="tower">
+      <!-- isometric stacked slabs; faces + edges -->
+      <g id="faces"></g>
+      <g id="edges"></g>
+    </svg>
+  </div>
+</header>
+<section class="stats">
+  <div><b>41</b><span>Completed works</span></div>
+  <div><b>1998</b><span>Founded</span></div>
+  <div><b>6</b><span>Countries</span></div>
+  <div><b>1</b><span>Material, mostly</span></div>
+</section>
+<section class="works" id="works">
+  <h2>Selected works</h2>
+  <div class="proj"><span class="n">01</span><span class="t">Nine Slabs, One Void</span><span class="loc">Cultural centre · Porto</span><span class="yr">2019</span></div>
+  <div class="proj"><span class="n">02</span><span class="t">The Standing Water Archive</span><span class="loc">Library · Utrecht</span><span class="yr">2021</span></div>
+  <div class="proj"><span class="n">03</span><span class="t">House Without a Front</span><span class="loc">Residence · Ticino</span><span class="yr">2023</span></div>
+  <div class="proj"><span class="n">04</span><span class="t">Column Hall</span><span class="loc">Transit station · Leipzig</span><span class="yr">2025</span></div>
+</section>
+<section class="credo" id="credo">
+  <p>Concrete forgives <em>nothing</em>, and remembers <em>everything</em>.</p>
+</section>
+<footer id="contact">
+  <span>Monolith Architektur · Basel</span>
+  <a href="../">Fable 25 — Index</a>
+  <span>studio@monolith.ch</span>
+</footer>
+<script>
+// build isometric stacked-slab tower from SVG faces + edges
+const iso=(x,y,z)=>{const ax=(x-z)*Math.cos(0.5236), ay=(x+z)*Math.sin(0.5236)-y;return [150+ax, 330-ay]};
+const faces=document.getElementById('faces'), edges=document.getElementById('edges');
+const S=42, floors=7;
+let fh='', eh='';
+for(let i=0;i<floors;i++){
+  const y0=i*44, y1=y0+40;
+  const off=(i%2)*6; // slight rotation offset per slab
+  const s=S-(i*1.2); // taper
+  // 8 corners
+  const c=[
+    iso(-s,y1,-s),iso(s,y1,-s),iso(s,y1,s),iso(-s,y1,s), //top
+    iso(-s,y0,-s),iso(s,y0,-s),iso(s,y0,s),iso(-s,y0,s)  //bottom
+  ];
+  const P=a=>a.map(p=>p.join(',')).join(' ');
+  // faces: top, left, right
+  fh+=`<polygon class="face lit" points="${P([c[0],c[1],c[2],c[3]])}"/>`;
+  fh+=`<polygon class="face" points="${P([c[3],c[2],c[6],c[7]])}"/>`;
+  fh+=`<polygon class="face" points="${P([c[2],c[1],c[5],c[6]])}"/>`;
+  // edges as one path per slab
+  const line=(a,b)=>`M${a[0].toFixed(1)} ${a[1].toFixed(1)} L${b[0].toFixed(1)} ${b[1].toFixed(1)}`;
+  const d=[line(c[0],c[1]),line(c[1],c[2]),line(c[2],c[3]),line(c[3],c[0]),line(c[3],c[7]),line(c[2],c[6]),line(c[1],c[5]),line(c[7],c[6]),line(c[6],c[5])].join(' ');
+  eh+=`<path class="edge" d="${d}"/>`;
+}
+faces.innerHTML=fh; edges.innerHTML=eh;
+// set dash lengths and animate on scroll
+const eps=[...edges.querySelectorAll('.edge')];
+eps.forEach(p=>{const L=p.getTotalLength();p.style.setProperty('--l',L)});
+const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(reduced){document.body.classList.add('drawn');eps.forEach(p=>p.style.strokeDashoffset=0)}
+else{
+  addEventListener('scroll',()=>{
+    const p=Math.min(scrollY/(innerHeight*1.1),1);
+    eps.forEach((el,i)=>{
+      const seg=i/eps.length;
+      const local=Math.max(0,Math.min(1,(p-seg*0.5)/0.5));
+      const L=parseFloat(el.style.getPropertyValue('--l'));
+      el.style.strokeDashoffset=L*(1-local);
+    });
+    if(p>0.35)document.body.classList.add('drawn');
+  },{passive:true});
+  // trigger initial
+  dispatchEvent(new Event('scroll'));
+}
+</script>
+</body>
+</html>
